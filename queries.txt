@@ -1,0 +1,13 @@
+create database lgmvip_student;
+
+use lgmvip_student;
+
+create table admins(id int auto_increment, admin_name varchar(30), user_name varchar(20) unique, password varchar(20), primary key(id));
+
+create table branches(id int auto_increment, branch_name varchar(30), primary key(id));
+
+create table students(id int auto_increment, student_name varchar(30), branch_id int, user_name varchar(20) unique, password varchar(20), primary key(id), constraint foreign key(branch_id) references branches(id) on update cascade on delete cascade);
+
+create table subjects(id int auto_increment, subject_name varchar(30), max_marks int, primary key(id));
+
+create table marks(id int auto_increment, student_id int, subject_id int, mark int, primary key(id), constraint foreign key(student_id) references students(id) on update cascade on delete cascade, constraint foreign key(subject_id) references subjects(id) on update cascade on delete cascade);
